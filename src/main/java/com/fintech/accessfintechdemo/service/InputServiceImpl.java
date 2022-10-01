@@ -4,6 +4,7 @@ import com.fintech.accessfintechdemo.job.CSVPriceJob;
 import com.fintech.accessfintechdemo.job.JsonPriceJob;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.csv.CSVFormat;
 
 import java.io.InputStream;
 import java.util.Map;
@@ -17,9 +18,11 @@ public class InputServiceImpl implements InputService {
 
     private final Map<String, Double> lowestPrices;
 
+    private final CSVFormat csvFormat;
+
     @Override
     public void createCSVJob(InputStream fileInputStream) {
-        priceJobsExecutor.submit(new CSVPriceJob(fileInputStream, lowestPrices));
+        priceJobsExecutor.submit(new CSVPriceJob(fileInputStream, lowestPrices, csvFormat));
     }
 
     @Override

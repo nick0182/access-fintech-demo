@@ -20,16 +20,9 @@ public class CSVPriceJob implements Runnable {
 
     private final InputStream fileInputStream;
 
-    private static final CSVFormat csvFormat = CSVFormat.Builder.create(CSVFormat.DEFAULT)
-            .setHeader(
-                    "Symbol",
-                    "Date",
-                    "Price",
-                    "Volume")
-            .setSkipHeaderRecord(true)
-            .build();
-
     private final Map<String, Double> lowestPrices;
+
+    private final CSVFormat csvFormat;
 
     @SneakyThrows
     @Override
